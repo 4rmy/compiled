@@ -1,0 +1,16 @@
+func int main()
+    int x = 2 ** 3
+
+    print(x)
+
+    x++
+
+    print(x)
+
+    x--
+    x--
+
+    print(x)
+
+    ret 0
+end

@@ -1,0 +1,8 @@
+# entrypoint
+func int main()
+    return getReturnCode() # exit code
+end
+
+func int getReturnCode()
+    return 0
+end

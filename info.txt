@@ -1,0 +1,28 @@
+#         #
+# WORKING #
+#         #
+
+Operators:
++   Add
+-   Subtract
+*   Multiply
+/   Divide
+%   Mod
+
+++  Increment
+--  Decrement
+**  Power
+//  Floor
+
+Special
+=   Assignment
+
+#             #
+# NOT WORKING #
+#             #
+
+Comparators
+&&  And
+||  Or
+!   Not
+==  Equals

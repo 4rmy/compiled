@@ -1,0 +1,139 @@
+[36m[HYPER][39m Lexing file
+[36m[HYPER][39m Lexing took 0.0 milliseconds
+{
+    "path": "./tests/test1.hyp",
+    "code": "func int main()\n    int x = 1\n    \n    x = x + 2\n\n    print(x)\n\n    ret 0\nend",
+    "character": 77,
+    "line": 8,
+    "tokens": [
+        "[id: func]",
+        "[id: int]",
+        "[id: main]",
+        "[LParen]",
+        "[RParen]",
+        "[NewLine]",
+        "[id: int]",
+        "[id: x]",
+        "[Operator: assign]",
+        "[int: 1]",
+        "[NewLine]",
+        "[NewLine]",
+        "[id: x]",
+        "[Operator: assign]",
+        "[id: x]",
+        "[Operator: Add]",
+        "[int: 2]",
+        "[NewLine]",
+        "[NewLine]",
+        "[id: print]",
+        "[LParen]",
+        "[id: x]",
+        "[RParen]",
+        "[NewLine]",
+        "[NewLine]",
+        "[id: ret]",
+        "[int: 0]",
+        "[NewLine]",
+        "[id: end]",
+        "[EOF]"
+    ]
+}
+[36m[HYPER][39m Parsing data
+[36m[HYPER][39m Parsing took 0.0 milliseconds
+{
+    "ast": [
+        "[Func: [Type: int], [id: main]]",
+        "[EOF]"
+    ]
+}
+[36m[HYPER][39m Interpreting...
+[36m[HYPER][39m Exited with status code 0
+[36m[HYPER][39m Interpreting took 1.0007 milliseconds
+{
+    "ast": [
+        "[Func: [Type: int], [id: main]]",
+        "[EOF]"
+    ],
+    "scopes": [
+        {
+            "main": [
+                [],
+                [
+                    {
+                        "type": "NewLine",
+                        "value": ""
+                    },
+                    {
+                        "type": {
+                            "type": "int"
+                        },
+                        "id": {
+                            "type": "id",
+                            "value": "x"
+                        },
+                        "value": {
+                            "value": "1"
+                        }
+                    },
+                    {
+                        "type": "NewLine",
+                        "value": ""
+                    },
+                    {
+                        "type": "NewLine",
+                        "value": ""
+                    },
+                    {
+                        "id": {
+                            "type": "id",
+                            "value": "x"
+                        },
+                        "value": {
+                            "left": {
+                                "type": "id",
+                                "value": "x"
+                            },
+                            "right": {
+                                "value": "2"
+                            }
+                        }
+                    },
+                    {
+                        "type": "NewLine",
+                        "value": ""
+                    },
+                    {
+                        "type": "NewLine",
+                        "value": ""
+                    },
+                    {
+                        "id": "print",
+                        "perams": [
+                            {
+                                "type": "id",
+                                "value": "x"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "NewLine",
+                        "value": ""
+                    },
+                    {
+                        "type": "NewLine",
+                        "value": ""
+                    },
+                    {
+                        "value": {
+                            "value": "0"
+                        }
+                    },
+                    {
+                        "type": "NewLine",
+                        "value": ""
+                    }
+                ]
+            ]
+        }
+    ]
+}
