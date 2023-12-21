@@ -48,3 +48,4 @@ if TIMING:
     Logger.info(f"Interpreting took {(end - start)/1000000} milliseconds")
 if OUTPUT:
     print(interpreter, file=out)
+
