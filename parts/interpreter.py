@@ -45,6 +45,8 @@ class Interpreter:
                 vals[ast[0][p].id] = (ast[0][p].type, float(self.execToken(perams[p])))
             elif ast[0][p].type == "str":
                 vals[ast[0][p].id] = (ast[0][p].type, str(self.execToken(perams[p])))
+            elif ast[0][p].type == "bool":
+                vals[ast[0][p].id] = (ast[0][p].type, bool(self.execToken(perams[p])))
 
         self.scopes.append(vals)
 
@@ -82,6 +84,8 @@ class Interpreter:
                 self.scopes[len(self.scopes)-1][token.id.value] = (token.type, float(self.execToken(token.value)))
             elif token.type.type == "str":
                 self.scopes[len(self.scopes)-1][token.id.value] = (token.type, str(self.execToken(token.value)))
+            elif token.type.type == "bool":
+                self.scopes[len(self.scopes)-1][token.id.value] = (token.type, bool(self.execToken(token.value)))
         elif isinstance(token, ast_assign):
             if self.scopes[len(self.scopes)-1].get(token.id.value, False):
                 self.scopes[len(self.scopes)-1][token.id.value] = (self.scopes[len(self.scopes)-1][token.id.value][0], self.execToken(token.value))
@@ -93,6 +97,13 @@ class Interpreter:
             return float(token.value)
         elif isinstance(token, ast_str):
             return str(token.value)
+        elif isinstance(token, ast_bool):
+            if token.value == "True":
+                return True
+            elif token.value == "False":
+                return False
+            else:
+                Logger.err(f"Unexpected boolean value \"{token.value}\"")
         elif isinstance(token, ast_add):
             return self.execToken(token.left) + self.execToken(token.right)
         elif isinstance(token, ast_sub):
@@ -117,6 +128,12 @@ class Interpreter:
                 self.scopes[len(self.scopes)-1][token.id.value] = (self.scopes[len(self.scopes)-1][token.id.value][0], self.scopes[len(self.scopes)-1][token.id.value][1]-1)
             else:
                 Logger.err(f"Variable \"{token.id.value}\" is undefined")
+        elif isinstance(token, ast_and):
+            return self.execToken(token.left) and self.execToken(token.right)
+        elif isinstance(token, ast_or):
+            return self.execToken(token.left) or self.execToken(token.right)
+        elif isinstance(token, ast_not):
+            return not self.execToken(token.target)
         elif isinstance(token, ast_paren):
             return self.execToken(token.body[0])
         elif isinstance(token, ast_ret):

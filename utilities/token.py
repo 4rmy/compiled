@@ -28,7 +28,7 @@ class Token():
 class ast_token_super:
     pass
 
-# float
+# types
 class ast_float(ast_token_super):
     def __init__(self, value) -> None:
         self.value = value
@@ -36,7 +36,6 @@ class ast_float(ast_token_super):
     
     def __str__(self) -> str:
         return f"[Float: {self.value}]"
-# int
 class ast_int(ast_token_super):
     def __init__(self, value) -> None:
         self.value = value
@@ -44,7 +43,6 @@ class ast_int(ast_token_super):
     
     def __str__(self) -> str:
         return f"[Int: {self.value}]"
-# string
 class ast_str(ast_token_super):
     def __init__(self, value) -> None:
         self.value = value
@@ -52,6 +50,13 @@ class ast_str(ast_token_super):
     
     def __str__(self) -> str:
         return f"[Str: {self.value}]"
+class ast_bool(ast_token_super):
+    def __init__(self, value) -> None:
+        self.value = value
+        super().__init__()
+    
+    def __str__(self) -> str:
+        return f"[Bool: {self.value}]"
 # type
 class ast_type(ast_token_super):
     def __init__(self, t) -> None:
@@ -137,6 +142,27 @@ class ast_dec(ast_token_super):
         super().__init__()
     def __str__(self) -> str:
         return f"[Dec: {self.id}]"
+# comparisons
+class ast_and(ast_token_super):
+    def __init__(self, left, right) -> None:
+        self.left = left
+        self.right = right
+        super().__init__()
+    def __str__(self) -> str:
+        return f"[And: {self.left}, {self.right}]"
+class ast_or(ast_token_super):
+    def __init__(self, left, right) -> None:
+        self.left = left
+        self.right = right
+        super().__init__()
+    def __str__(self) -> str:
+        return f"[Or: {self.left}, {self.right}]"
+class ast_not(ast_token_super):
+    def __init__(self, target) -> None:
+        self.target = target
+        super().__init__()
+    def __str__(self) -> str:
+        return f"[Not: {self.target}]"
 # assignments
 class ast_assign(ast_token_super):
     def __init__(self, var, val) -> None:

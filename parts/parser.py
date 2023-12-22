@@ -21,7 +21,9 @@ class Parser:
                     ast[t] = ast_float(ast[t].value)
                 elif ast[t].type == "str":
                     ast[t] = ast_str(ast[t].value)
-        
+                elif ast[t].type == "bool":
+                    ast[t] = ast_bool(ast[t].value)
+
         # convert types
         for t in range(len(ast)):
             if isinstance(ast[t], Token):
@@ -32,7 +34,9 @@ class Parser:
                         ast[t] = ast_type("float")
                     elif ast[t].value == "str":
                         ast[t] = ast_type("str")
-
+                    elif ast[t].value == "bool":
+                        ast[t] = ast_type("bool")
+        
         # form parentheses
         building = False
         paren_body = []
@@ -141,7 +145,7 @@ class Parser:
                         ast.pop(t)
             t += 1
         
-        ## multi + div + mod
+        ## multi + div + mod + pow + floor
         t = 0
         while t < len(ast):
             if isinstance(ast[t], Token):
@@ -189,6 +193,26 @@ class Parser:
                         ast.pop(t+1)
             t += 1
         
+        # comparisons
+        t = 0
+        while t < len(ast):
+            if isinstance(ast[t], Token):
+                if ast[t].type == "Comp":
+                    if ast[t].value == "and":
+                        ast[t] = ast_and(ast[t-1], ast[t+1])
+                        ast.pop(t-1)
+                        t -= 1
+                        ast.pop(t+1)
+                    elif ast[t].value == "or":
+                        ast[t] = ast_or(ast[t-1], ast[t+1])
+                        ast.pop(t-1)
+                        t -= 1
+                        ast.pop(t+1)
+                    elif ast[t].value == "not":
+                        ast[t] = ast_not(ast[t+1])
+                        ast.pop(t+1)
+            t += 1
+
         # assignments
         t = 0
         while t < len(ast):

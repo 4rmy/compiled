@@ -165,7 +165,10 @@ class Lexer:
             self.character += 1
         
         # create token and add it to the list
-        self.tokens.append(Token("id", id))
+        if id in ["True", "False"]:
+            self.tokens.append(Token("bool", id))
+        else:
+            self.tokens.append(Token("id", id))
 
         # adjust for offset
         self.character -= 1
