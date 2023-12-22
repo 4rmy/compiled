@@ -75,4 +75,18 @@ end
 Here, we have the `Integer` type as `int`, the `Floating Point` type as `float`, the `String` type as
 `str`, and lastly, the `Boolean` type as `bool`.
 
-### There is more to this but I can't be bothered rn
+### Functions
+You can define a function in the same way you defined the entry point, but you have to change the name of it and the type of it, only if you want to return a different type. For instance, if you want a function that returns a float value and you want the function to be called `my_function` you would add the following to your code.
+```
+func float my_function()
+    ret 0.0
+end
+```
+You can then call this function from your main function, we will store the result in a variable, like so:
+```
+func int main()
+    float my_float = my_function()
+
+    ret 0
+end
+```
