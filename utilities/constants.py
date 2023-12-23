@@ -1,3 +1,3 @@
 LETTERS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 NUMBERS = "0123456789"
-KEYWORDS = ["end", "assign", "func", "if", "while"]
+KEYWORDS = ["end", "ret", "func", "if", "while", "else", "for"]

@@ -16,24 +16,27 @@ for fast testing, but also compiled for fast execution when deployed.
     - &&
     - ||
     - !
-
-### In Progress
-- Nothing rn because I wanna sleep
-    - Zzzzzzz
-
-### Coming Soon
 - Value Comparisons
     - ==
     - \>
     - <
     - \>=
     - <=
+
+### In Progress
 - If statements
-- Else statements
+- If-Else statements
 - Else-If statements
+
+### Coming Soon
 - Loops
     - For
     - While
+
+### Future Plans
+- Classes
+- External Modules
+- Packaging
 
 ## Syntax
 ### Entry Point

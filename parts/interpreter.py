@@ -134,6 +134,16 @@ class Interpreter:
             return self.execToken(token.left) or self.execToken(token.right)
         elif isinstance(token, ast_not):
             return not self.execToken(token.target)
+        elif isinstance(token, ast_g):
+            return self.execToken(token.left) > self.execToken(token.right)
+        elif isinstance(token, ast_ge):
+            return self.execToken(token.left) >= self.execToken(token.right)
+        elif isinstance(token, ast_l):
+            return self.execToken(token.left) < self.execToken(token.right)
+        elif isinstance(token, ast_le):
+            return self.execToken(token.left) <= self.execToken(token.right)
+        elif isinstance(token, ast_equ):
+            return self.execToken(token.left) == self.execToken(token.right)
         elif isinstance(token, ast_paren):
             return self.execToken(token.body[0])
         elif isinstance(token, ast_ret):

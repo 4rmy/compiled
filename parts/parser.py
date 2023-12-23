@@ -211,6 +211,31 @@ class Parser:
                     elif ast[t].value == "not":
                         ast[t] = ast_not(ast[t+1])
                         ast.pop(t+1)
+                    elif ast[t].value == "equals":
+                        ast[t] = ast_equ(ast[t-1], ast[t+1])
+                        ast.pop(t-1)
+                        t -= 1
+                        ast.pop(t+1)
+                    elif ast[t].value == "g":
+                        ast[t] = ast_g(ast[t-1], ast[t+1])
+                        ast.pop(t-1)
+                        t -= 1
+                        ast.pop(t+1)
+                    elif ast[t].value == "l":
+                        ast[t] = ast_l(ast[t-1], ast[t+1])
+                        ast.pop(t-1)
+                        t -= 1
+                        ast.pop(t+1)
+                    elif ast[t].value == "ge":
+                        ast[t] = ast_ge(ast[t-1], ast[t+1])
+                        ast.pop(t-1)
+                        t -= 1
+                        ast.pop(t+1)
+                    elif ast[t].value == "le":
+                        ast[t] = ast_le(ast[t-1], ast[t+1])
+                        ast.pop(t-1)
+                        t -= 1
+                        ast.pop(t+1)
             t += 1
 
         # assignments

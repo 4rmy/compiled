@@ -163,6 +163,41 @@ class ast_not(ast_token_super):
         super().__init__()
     def __str__(self) -> str:
         return f"[Not: {self.target}]"
+class ast_g(ast_token_super):
+    def __init__(self, left, right) -> None:
+        self.left = left
+        self.right = right
+        super().__init__()
+    def __str__(self) -> str:
+        return f"[Greater: {self.left}, {self.right}]"
+class ast_ge(ast_token_super):
+    def __init__(self, left, right) -> None:
+        self.left = left
+        self.right = right
+        super().__init__()
+    def __str__(self) -> str:
+        return f"[GreaterOrEqual: {self.left}, {self.right}]"
+class ast_l(ast_token_super):
+    def __init__(self, left, right) -> None:
+        self.left = left
+        self.right = right
+        super().__init__()
+    def __str__(self) -> str:
+        return f"[Less: {self.left}, {self.right}]"
+class ast_le(ast_token_super):
+    def __init__(self, left, right) -> None:
+        self.left = left
+        self.right = right
+        super().__init__()
+    def __str__(self) -> str:
+        return f"[LessOrEqual: {self.left}, {self.right}]"
+class ast_equ(ast_token_super):
+    def __init__(self, left, right) -> None:
+        self.left = left
+        self.right = right
+        super().__init__()
+    def __str__(self) -> str:
+        return f"[Equal: {self.left}, {self.right}]"
 # assignments
 class ast_assign(ast_token_super):
     def __init__(self, var, val) -> None:

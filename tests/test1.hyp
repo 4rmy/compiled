@@ -1,6 +1,4 @@
 func int main()
-    bool x = !False
-    print(x)
 
     ret 0
 end

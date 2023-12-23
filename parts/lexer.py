@@ -147,6 +147,20 @@ class Lexer:
                 else:
                     self.tokens.append(Token("Operator", "assign"))
 
+            # greater than, less than
+            elif self.code[self.character] == ">":
+                if self.code[self.character+1] == "=":
+                    self.tokens.append(Token("Comp", "ge"))
+                    self.character += 1
+                else:
+                    self.tokens.append(Token("Comp", "g"))
+            elif self.code[self.character] == "<":
+                if self.code[self.character+1] == "=":
+                    self.tokens.append(Token("Comp", "le"))
+                    self.character += 1
+                else:
+                    self.tokens.append(Token("Comp", "l"))
+
             # increment character
             self.character += 1
         
