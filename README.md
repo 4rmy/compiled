@@ -29,12 +29,12 @@ for fast testing, but also compiled for fast execution when deployed.
     - Elseif
 
 ### In Progress
-- Nothing, I'm done for today because sleeping is cool sometimes
-
-### Coming Soon
 - Loops
     - For
     - While
+
+### Coming Soon
+- TBD
 
 ### Future Plans
 - Classes
