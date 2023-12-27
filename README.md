@@ -1,6 +1,7 @@
 # Hyper Language
-This project was created to make a language that was able to be interpreted
+This project was created to make a language that is able to be interpreted
 for fast testing, but also compiled for fast execution when deployed.
+(Not compiled yet bc windows asm is... fun.)
 
 ## Features
 ### Current
