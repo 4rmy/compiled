@@ -1,6 +1,7 @@
 import json
 from utilities.token import *
 from utilities.constants import *
+import colorama
 
 class Parser:
     def __init__(self, tokens: list) -> None:
@@ -78,6 +79,7 @@ class Parser:
         func_body = []
         start = 0
         end = 0
+        index = 0
         building = False
         while t < len(ast):
             if isinstance(ast[t], Token):
@@ -89,17 +91,23 @@ class Parser:
                             building = True
                     else:
                         if ast[t].value == "end":
-                            building = False
-                            func_body = func_body[3:]
-                            ast[start] = ast_func(ast[start+1], ast[start+2], self.functionPerams(ast[start+3]), func_body)
-                            end = t
+                            if index == 0:
+                                building = False
+                                func_body = func_body[3:]
+                                ast[start] = ast_func(ast[start+1], ast[start+2], self.functionPerams(ast[start+3]), func_body)
+                                end = t
 
-                            t = start
-                            for _ in range(end - start):
-                                ast.pop(t + 1)
-                            
-                            ast[t].body = self.parse(ast[t].body)
+                                t = start
+                                for _ in range(end - start):
+                                    ast.pop(t + 1)
+                                
+                                ast[t].body = self.parse(ast[t].body)
+                            else:
+                                index -= 1
+                                func_body.append(ast[t])
                         else:
+                            if ast[t].value == "if":
+                                index += 1
                             func_body.append(ast[t])
                 else:
                     if building:
@@ -107,6 +115,15 @@ class Parser:
             else:
                 if building:
                     func_body.append(ast[t])
+            t += 1
+        
+        # if statements
+        t = 0
+        while t < len(ast):
+            if isinstance(ast[t], Token):
+                if ast[t].type == "id":
+                    if ast[t].value == "if":
+                        ast = self.ifStatement(ast, t).copy()
             t += 1
 
         # function calls
@@ -277,6 +294,87 @@ class Parser:
                 peramlist.append(ast_peram(tkn.body[t].type, tkn.body[t+1].value))
             t += 1
         return peramlist
+
+    def ifStatement(self, ast: list, tkn_index: int):
+        tknlist = ast.copy()
+        bodies = []
+
+        conditional = tknlist[tkn_index+1]
+        body = []
+        building = True
+        start = tkn_index
+        index = 0
+        
+        t = tkn_index + 2
+        while t < len(tknlist):
+            if isinstance(tknlist[t], Token):
+                if tknlist[t].type == "id":
+                    if tknlist[t].value == "if":
+                        if not building:
+                            start = t
+                            building = True
+
+                            body = []
+                            conditional = tknlist[t+1]
+
+                            t = t + 1
+                        else:
+                            body.append(tknlist[t])
+                            index += 1
+                    elif tknlist[t].value == "end":
+                        if building:
+                            if index == 0:
+                                building = False
+                                bodies.append((conditional, body))
+
+                                while t > start:
+                                    tknlist.pop(t)
+                                    t -= 1
+
+                                for i in range(len(bodies)):
+                                    bodies[i] = (bodies[i][0], self.parse(bodies[i][1]))
+                                
+                                tknlist[tkn_index] = ast_if(bodies)
+                            else:
+                                index -= 1
+                                body.append(tknlist[t])
+                    elif tknlist[t].value == "else":
+                        if building:
+                            if index == 0:
+                                bodies.append((conditional, body))
+                                while t > start:
+                                    tknlist.pop(t)
+                                    t -= 1
+                                body = []
+                                conditional = None
+                            else:
+                                body.append(tknlist[t])
+                    elif tknlist[t].value == "elseif":
+                        if building:
+                            if index == 0:
+                                bodies.append((conditional, body))
+                                while t > start:
+                                    tknlist.pop(t)
+                                    t -= 1
+                                body = []
+                                conditional = tknlist[t+1]
+
+                                t = t + 1
+                            else:
+                                body.append(tknlist[t])
+                    else:
+                        if building:
+                            body.append(tknlist[t])
+                else:
+                    if building:
+                        body.append(tknlist[t])
+            else:
+                if building:
+                    body.append(tknlist[t])
+
+            t += 1
+
+        return tknlist
 
     # printing class
     def __repr__(self) -> str:

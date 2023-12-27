@@ -22,11 +22,13 @@ for fast testing, but also compiled for fast execution when deployed.
     - <
     - \>=
     - <=
+- If statements
+    - If
+    - Else
+    - Elseif
 
 ### In Progress
-- If statements
-- If-Else statements
-- Else-If statements
+- Nothing, I'm done for today because sleeping is cool sometimes
 
 ### Coming Soon
 - Loops
@@ -93,3 +95,45 @@ func int main()
     ret 0
 end
 ```
+
+### If Statements
+#### Basic If
+All `If` statements begin with `if` and a conditional in `()` and end with `end` (that's a mouthful). Here is an example:
+```
+func int main()
+    if (1 < 2)
+
+    end
+
+    ret 0
+end
+```
+In that scenario, 1 < 2 is always true, therefore, the body between the `if` and `end` segments will always execute.
+#### If Else
+For an `If Else` statement, you can follow the same format as an `If` statement, but add an else in the main body, like so:
+```
+func int main()
+    if (2 < 1)
+
+    else
+
+    end
+
+    ret 0
+end
+```
+In this case, 2 is always less than 1, meaning the else segment will always execute.
+#### Else If
+Lastly, for an `Else If` statement, you can follow the same format as an `If` statement, but add an `else` before the `if` inside of a regular `If` statement, like so:
+```
+func int main()
+    if (2 < 1)
+
+    elseif (3 > 2)
+
+    end
+
+    ret 0
+end
+```
+this will cause the 3 to always be greater than 2, resulting in the `elseif` segment to always execute instead of the `if` segment

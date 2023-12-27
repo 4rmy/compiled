@@ -245,3 +245,11 @@ class ast_call(ast_token_super):
         super().__init__()
     def __str__(self) -> str:
         return f"[Call: {self.id}, {self.perams}]"
+# if statement
+class ast_if(ast_token_super):
+    def __init__(self, bodies) -> None:
+        self.bodies = bodies
+        super().__init__()
+    
+    def __str__(self) -> str:
+        return f"[If: {len(self.bodies)}]"

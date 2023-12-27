@@ -164,6 +164,12 @@ class Interpreter:
                 return self.execFunc(self.scopes[0].get(token.id), token.perams)
             else:
                 return 0
+        elif isinstance(token, ast_if):
+            for i in range(len(token.bodies)):
+                if token.bodies[i][0] == None or self.execToken(token.bodies[i][0]):
+                    for t in token.bodies[i][1]:
+                        self.execToken(t)
+                    break
         else:
             print(token)
             return 0

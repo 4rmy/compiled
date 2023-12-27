@@ -16,13 +16,3 @@ Operators:
 
 Special
 =   Assignment
-
-#             #
-# NOT WORKING #
-#             #
-
-Comparators
-&&  And
-||  Or
-!   Not
-==  Equals

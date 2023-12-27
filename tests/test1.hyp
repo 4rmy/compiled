@@ -1,4 +1,16 @@
 func int main()
+    int x = 4
+    int y = 3
 
-    ret 0
+    if (x < y)
+        if (x < y - 1)
+            print("X was less than Y")
+        else
+            print("X was Y - 1")
+        end
+    elseif (x == y)
+        print("X was equal to Y")
+    else
+        print("X was greater than Y")
+    end
 end
